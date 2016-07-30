@@ -1,4 +1,6 @@
 #include "arguments.hpp"
+#include "debug.hpp"
+
 
 #include <cstring>
 
@@ -38,8 +40,7 @@ void handle_args(int argc, char* argv[])
 void print_usage()
 {
 	std::cout << "Usage: Luna -help\nPress return to continue..\n";
-	getchar();
-	std::exit(-1);
+	debug_prompt();
 }
 
 void print_help()

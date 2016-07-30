@@ -20,25 +20,45 @@ Comments in Luna are not unfamiliar to Lua's comments
 
 ### Tokens
 Now to the actual lexical tokens of Luna:
+
 Identifier          - (a-z/A-Z)
+
 StringLiteral       - any ASCII character(s) enclosed between to parathesis (")
+
 CharacterLiteral    - any ASCII **character** enclosed in single quotation (')
+
 IntegerLiteral      - any numerical value not enclosed in quotation or pre/suffixed with characters
+
 FloatLiteral        - any decimal value (contains a . betweeen values to denote decimal) or suffixed with an 'f'
+
 Keyword             - any exact word from Luna's keyword pool (capitalization matters!)
+
 /
-*
-+
--
+
+\*
+
+\+
+
+\-
+
 (
+
 )
+
 =
+
 ==
+
 !=
+
 [
+
 ]
+
 ++
+
 --
+
 ;
 
 ### Keywords
