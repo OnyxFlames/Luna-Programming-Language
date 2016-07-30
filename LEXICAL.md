@@ -45,9 +45,9 @@ Keyword             - any exact word from Luna's keyword pool (capitalization ma
 
 )
 
-=
+\=
 
-==
+\==
 
 !=
 
@@ -57,7 +57,7 @@ Keyword             - any exact word from Luna's keyword pool (capitalization ma
 
 ++
 
---
+\--
 
 ;
 
