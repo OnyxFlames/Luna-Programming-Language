@@ -1,0 +1,6 @@
+An AST in C++ can take advantange of OOP.
+
+So there is a root node, called the ASTNode, which is inherited by all the other nodes as a base
+
+There can be other nodes like ExpressionNode, StatementNode, FunctionNode, ConstNode, OperandNode, ExpressionBlockNode,
+ etc all linking up so a 'tree-crawler' will go up and down the nodes and generate Lua code for what they contain.
