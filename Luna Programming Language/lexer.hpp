@@ -15,7 +15,7 @@ private:
 
 	bool is_keyword(const std::string &word, std::vector<std::string> word_pool);
 	void handle_identifier(std::string val, int start, int end);
-	void handle_keyword(const std::string &val);
+	void handle_keyword(const std::string &val, int start, int end);
 	void handle_string_literal(int _token_start);
 	void store_binop(int val, int _token_start);
 

@@ -7,10 +7,24 @@ struct token;
 
 token create_token(std::string _val, int _start, int _end, short _tokentype);
 std::string enum_to_string(short token_type);
+short keyword_to_enum(const std::string keyword);
 bool is_operator(const std::string &val);
 short get_operator(const std::string &val);
 bool is_half_operator(int val);
 bool does_make_operator(int val1, int val2);
+
+enum keyword_enum 
+{
+	_var = 0,
+	_gbl,
+	_if,
+	_else,
+	_def,
+	_for,
+	_while,
+	_true,
+	_false,
+};
 
 static std::array<std::string, 9> keywords = {
 	"var",

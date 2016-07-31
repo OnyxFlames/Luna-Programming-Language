@@ -27,7 +27,7 @@ bool Lexer::lex()
 	int token_start = 0;
 	int token_end = 0;
 	int val = input.get();
-	while (/*val != EOF && */!input.eof())
+	while (!input.eof())
 	{
 		buffer = "";
 		if (std::isalpha(val))
@@ -44,7 +44,10 @@ bool Lexer::lex()
 					std::cout << "[Debug] Lexer::lex() buffer contains: " << buffer << "\n";
 				val = input.get();
 			}
-			token_end = (int)input.tellg();
+			if (input.eof())
+				token_end = (token_start + buffer.size());
+			else 
+				token_end = (int)input.tellg();
 			handle_identifier(buffer, token_start, token_end);
 		}
 		else if (std::isspace(val))
@@ -79,7 +82,7 @@ bool Lexer::lex()
 					{
 					case 0x00:
 						std::cerr << "\"" << buffer << "\" is not an operator! get_operator() returned 0x00. is_operator() failed!\n";
-						std::exit(-1);
+						debug_prompt();
 						break;
 					case op_increment:
 						token_end = (int)input.tellg();
@@ -111,7 +114,7 @@ bool Lexer::lex()
 			val = input.get();
 		}
 		else
-			return false;// is_keyword("var", std::vector<std::string>(keywords.data(), keywords.data() + keywords.size()));	// temporary check for the is_keyword() function
+			return false;
 	}
 	return false; // to stop the compiler from complaining
 }
@@ -200,7 +203,7 @@ void Lexer::handle_identifier(const std::string val, int start, int end)
 {
 	if (is_keyword(val, std::vector<std::string>(keywords.data(), keywords.data() + keywords.size())))
 	{
-		handle_keyword(val);
+		handle_keyword(val, start, end);
 	}
 	else
 	{
@@ -208,9 +211,15 @@ void Lexer::handle_identifier(const std::string val, int start, int end)
 	}
 }
 
-void Lexer::handle_keyword(const std::string &val)
+void Lexer::handle_keyword(const std::string &val, int start, int end)
 {
-
+	if (keyword_to_enum(val) == -1)
+	{
+		std::cout << "keyword_to_enum() returned -1. Lexer::handle_keyword() was passed invalid data!\n";
+		debug_prompt();
+	}	
+	else
+		tokens->push_back(create_token(val, start, end, Keyword));
 }
 
 void Lexer::handle_string_literal(int _token_start)

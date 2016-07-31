@@ -9,6 +9,30 @@ token create_token(std::string _val, int _start, int _end, short _tokentype)
 	ret.token_type = _tokentype;
 	return ret;
 }
+short keyword_to_enum(const std::string keyword)
+{
+	if (keyword == "var")
+		return _var;
+	else if (keyword == "gbl")
+		return _gbl;
+	else if (keyword == "if")
+		return _if;
+	else if (keyword == "else")
+		return _else;
+	else if (keyword == "def")
+		return _def;
+	else if (keyword == "for")
+		return _for;
+	else if (keyword == "while")
+		return _while;
+	else if (keyword == "true")
+		return _true;
+	else if (keyword == "false")
+		return _false;
+	else
+		return -1;
+}
+
 std::string enum_to_string(short token_type)
 {
 	return token_Type_strings[token_type];
