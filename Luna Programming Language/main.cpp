@@ -47,7 +47,6 @@ int main(int argc, char* argv[])
 		lexer.load_file(it);
 		lexer.lex();
 	}
-
 	if (l_dump) dump_lex(token_vector);
 	if (p_dump) dump_parse(/*expressions*/);	// no implementation yet.
 	if (output_file) gen_output(/*output*/);	// no implementation yet

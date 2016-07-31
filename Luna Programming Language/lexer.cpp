@@ -45,7 +45,7 @@ bool Lexer::lex()
 				val = input.get();
 			}
 			token_end = (int)input.tellg();
-			handle_identifier(buffer, *tokens, token_start, token_end);
+			handle_identifier(buffer, token_start, token_end);
 		}
 		else if (std::isspace(val))
 		{
@@ -196,11 +196,11 @@ void Lexer::store_binop(int val, int _token_start)
 	}
 }
 
-void Lexer::handle_identifier(const std::string val, std::vector<token> &_tokens, int start, int end)
+void Lexer::handle_identifier(const std::string val, int start, int end)
 {
 	if (is_keyword(val, std::vector<std::string>(keywords.data(), keywords.data() + keywords.size())))
 	{
-		handle_keyword(val, _tokens);
+		handle_keyword(val);
 	}
 	else
 	{
@@ -208,7 +208,7 @@ void Lexer::handle_identifier(const std::string val, std::vector<token> &_tokens
 	}
 }
 
-void Lexer::handle_keyword(const std::string &val, std::vector<token> &_tokens)
+void Lexer::handle_keyword(const std::string &val)
 {
 
 }
