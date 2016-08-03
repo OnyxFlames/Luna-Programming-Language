@@ -17,6 +17,7 @@ private:
 	void handle_identifier(std::string val, int start, int end);
 	void handle_keyword(const std::string &val, int start, int end);
 	void handle_string_literal(int _token_start);
+	void handle_char_literal(int _token_start);
 	void store_binop(int val, int _token_start);
 
 public:

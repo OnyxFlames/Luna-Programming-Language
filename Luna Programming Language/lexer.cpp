@@ -64,6 +64,13 @@ bool Lexer::lex()
 				val = input.get();
 				continue;
 			}
+			if (val == '\'')
+			{
+				token_start = (int)input.tellg();
+				handle_char_literal(token_start);
+				val = input.get();
+				continue;
+			}
 
 			while (std::ispunct(val))
 			{
@@ -307,7 +314,67 @@ void Lexer::handle_string_literal(int _token_start)
 	}
 	// end of loop
 	//str_buffer += "\"";									// vvv 'token_end' is the token_start plus the string size.
-	tokens->push_back(create_token(str_buffer, _token_start, str_buffer.size(), StringLiteral));
+	tokens->push_back(create_token(str_buffer, _token_start, str_buffer.size() + _token_start - 1, StringLiteral));
+}
+void Lexer::handle_char_literal(int _token_start)
+{
+	std::string buffer = "\'";
+	int val = 0;
+	val = input.get();
+	if (val == '\\')
+	{
+		val = input.get();
+		switch (val)
+		{
+		case 'a':
+			buffer += "\\a";
+			break;
+		case 'b':
+			buffer += "\\a";
+			break;
+		case 'f':
+			buffer += "\\f";
+			break;
+		case 'n':
+			buffer += "\\n";
+			break;
+		case 'r':
+			buffer += "\\r";
+			break;
+		case 't':
+			buffer += "\\t";
+			break;
+		case 'v':
+			buffer += "\\v";
+			break;
+		case '\\':
+			buffer += "\\\\";
+			break;
+		case '"':
+			buffer += "\\\"";
+			break;
+		case '\'':
+			buffer += "\\\'";
+			break;
+		case '[':
+			buffer += "\\[";
+			break;
+		case ']':
+			buffer += "\\]";
+			break;
+		default:
+			std::cerr << "Error \'\\" << (char)val << "\' is not a valid escape character! Exiting..\n";
+			debug_prompt();
+			break;
+		}
+	}
+	else
+	{
+		buffer += val;
+	}
+	buffer += "\'";
+	tokens->push_back(create_token(buffer, _token_start, buffer.size() + _token_start - 1, CharacterLiteral));
+	input.get();
 }
 
 Lexer::~Lexer()
